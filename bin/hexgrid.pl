@@ -27,7 +27,7 @@ sub print_array {
 }
 
 my $array =
-  [ map { [ split( '', ' ' x ( $width * 3 + 1 ) ) ] } 0 .. $height * 3 ];
+  [ map { [ split( '', ' ' x ( $width * 3 + 1 ) ) ] } 0 .. $height * 2 + 1 ];
 
 my ( $y, $x, $up ) = ( 1, 0, 0 );
 for ( 1 .. $height ) {
