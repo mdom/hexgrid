@@ -9,10 +9,10 @@ my @shapes = map { [ split( '', $_ ) ] } ' __ ', '/  \\', '\\__/';
 
 sub draw_hex {
     my ( $grid, $y, $x, $up ) = @_;
-    for my $i ( 0 .. 2 ) {
-        while ( my ( $idx, $char ) = each $shapes[$i] ) {
-            next if $grid->[ $y + $i - $up ]->[ $x + $idx ] ne ' ';
-            $grid->[ $y + $i - $up ]->[ $x + $idx ] = $char;
+    while ( my ( $row, $shape ) = each @shapes ) {
+        while ( my ( $idx, $char ) = each $shape ) {
+            next if $grid->[ $y + $row - $up ]->[ $x + $idx ] ne ' ';
+            $grid->[ $y + $row - $up ]->[ $x + $idx ] = $char;
         }
     }
     return;
