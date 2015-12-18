@@ -5,7 +5,7 @@ use warnings;
 
 my ( $width, $height ) = @ARGV;
 
-my @shapes = map { [split('',$_)] } ' __ ', '/  \\', '\\__/';
+my @shapes = map { [ split( '', $_ ) ] } ' __ ', '/  \\', '\\__/';
 
 sub draw_hex {
     my ( $grid, $y, $x, $up ) = @_;
@@ -26,7 +26,8 @@ sub print_array {
     return;
 }
 
-my $array = [ map { [ split('', ' ' x ($width*3+1) ) ] } 0 .. $height*3 ];
+my $array =
+  [ map { [ split( '', ' ' x ( $width * 3 + 1 ) ) ] } 0 .. $height * 3 ];
 
 my ( $y, $x, $up ) = ( 1, 0, 0 );
 for ( 1 .. $height ) {
@@ -35,10 +36,9 @@ for ( 1 .. $height ) {
         $x += 3;
         $up = !$up;
     }
-    $x = 0;
     $y += 2;
-    $up = 0
+    $x = 0;
 }
 
-    print_array( $array );
+print_array($array);
 
