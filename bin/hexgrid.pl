@@ -10,9 +10,8 @@ my @shapes = map { [split('',$_)] } ' __ ', '/  \\', '\\__/';
 sub draw_hex {
     my ( $grid, $y, $x, $up ) = @_;
     for my $i ( 0 .. 2 ) {
-            my $value = $grid->[ $y + $i - $up ]->[ $x + $idx ];
-            next if defined $value and $value ne ' ';
         while ( my ( $idx, $char ) = each $shapes[$i] ) {
+            next if $grid->[ $y + $i - $up ]->[ $x + $idx ] ne ' ';
             $grid->[ $y + $i - $up ]->[ $x + $idx ] = $char;
         }
     }
@@ -22,18 +21,18 @@ sub draw_hex {
 sub print_array {
     my $array = shift;
     for my $row (@$array) {
-        print join( '', map { defined($_) ? $_ : ' ' } @$row ) . "\n";
+        print join( '', @$row ) . "\n";
     }
     return;
 }
 
-my @array;
+my $array = [ map { [ split('', ' ' x ($width*3+1) ) ] } 0 .. $height*3 ];
 
 my ( $y, $x, $up ) = ( 1, 0, 0 );
 for ( 1 .. $height ) {
     for ( 1 .. $width ) {
-        draw_hex( \@array, $y, $x, $up );
         $up = $up ? 0 : 1;
+        draw_hex( $array, $y, $x, $up );
         $x += 3;
     }
     $x = 0;
@@ -41,5 +40,5 @@ for ( 1 .. $height ) {
     $up = 0
 }
 
-    print_array( \@array );
+    print_array( $array );
 
