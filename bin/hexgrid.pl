@@ -5,15 +5,14 @@ use warnings;
 
 my ( $width, $height ) = @ARGV;
 
-my @shapes = ( ' __ ', '/  \\', '\\__/' );
+my @shapes = map { [split('',$_)] } ' __ ', '/  \\', '\\__/';
 
 sub draw_hex {
     my ( $grid, $y, $x, $up ) = @_;
     for my $i ( 0 .. 2 ) {
-        my @chars = split '', $shapes[$i];
-        while ( my ( $idx, $char ) = each @chars ) {
             my $value = $grid->[ $y + $i - $up ]->[ $x + $idx ];
             next if defined $value and $value ne ' ';
+        while ( my ( $idx, $char ) = each $shapes[$i] ) {
             $grid->[ $y + $i - $up ]->[ $x + $idx ] = $char;
         }
     }
