@@ -31,9 +31,9 @@ my $array = [ map { [ split('', ' ' x ($width*3+1) ) ] } 0 .. $height*3 ];
 my ( $y, $x, $up ) = ( 1, 0, 0 );
 for ( 1 .. $height ) {
     for ( 1 .. $width ) {
-        $up = $up ? 0 : 1;
         draw_hex( $array, $y, $x, $up );
         $x += 3;
+        $up = !$up;
     }
     $x = 0;
     $y += 2;
